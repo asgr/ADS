@@ -1,0 +1,11 @@
+Package: ADS
+Type: Package
+Title: NASA ADS API
+Version: 0.1.0
+Author: Aaron Robotham
+Maintainer: Aaron Robotham <aaron.robotham@uwa.edu.au>
+Description: Presents basic stats on NASA ADS libraries and metrics.
+License: LGPL-3
+Imports: httr, foreach
+Encoding: UTF-8
+LazyData: true
