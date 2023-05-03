@@ -1,5 +1,5 @@
-\name{ADS_metrics}
-\alias{ADS_metrics}
+\name{ADS}
+\alias{ADS}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 NASA ADS API Functions
