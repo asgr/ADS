@@ -2,9 +2,10 @@ exportPattern("^[[:alpha:]]+")
 
 import("httr")
 import("foreach")
-import("doParallel")
 
 S3method("print", ADS_metrics)
 S3method("print", ADS_export)
 
 S3method("plot", ADS_metrics)
+
+importFrom("graphics", "abline", "barplot", "legend", "par")

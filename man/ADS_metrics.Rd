@@ -1,5 +1,11 @@
 \name{ADS}
 \alias{ADS}
+\alias{ADS_library}
+\alias{ADS_metrics}
+\alias{ADS_export}
+\alias{print.ADS_metrics}
+\alias{print.ADS_export}
+\alias{plot.ADS_metrics}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 NASA ADS API Functions
@@ -9,9 +15,13 @@ Various functions to interact with NASA ADS Libraries and Papers.
 }
 \usage{
 ADS_metrics(papers = "2015PASA...32...33R", Authorisation = NULL)
-ADS_export(papers = "2015PASA...32...33R", format = "\%T \%5.3L, \%Y, \%q, \%V, \%p,
-  C=\%c", Authorisation = NULL)
+ADS_export(papers = "2015PASA...32...33R", Authorisation = NULL,
+  format = "\%T \%5.3L, \%Y, \%q, \%V, \%p, C=\%c")
 ADS_library(library = NULL, Authorisation = NULL, rows = 1000)
+\method{print}{ADS_metrics}(x, ...)
+\method{print}{ADS_export}(x, ...)
+
+\method{plot}{ADS_metrics}(x, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,8 +34,17 @@ Character scalar; NASA ADS API token. You can get this at https://ui.adsabs.harv
   \item{format}{
 Character scalar; custom ADS export format.
 }
+  \item{library}{
+Character scalar; ADS library ID.
+}
   \item{rows}{
 Integer scalar; maximum number of papers to return.
+}
+  \item{x}{
+An object of a relevant class.
+}
+  \item{\dots}{
+Other arguments passed onto \code{print} and \code{plot}.
 }
 }
 \value{

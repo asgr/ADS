@@ -63,7 +63,7 @@ plot.ADS_metrics = function(x, ...){
   ), lty=c(NA,2), col=c(NA,'red'))
 }
 
-ADS_export = function(papers="2015PASA...32...33R", format="%T %5.3L, %Y, %q, %V, %p, C=%c", Authorisation=NULL){
+ADS_export = function(papers="2015PASA...32...33R", Authorisation=NULL, format="%T %5.3L, %Y, %q, %V, %p, C=%c"){
 
   headers = c(
     `Authorization` = paste0("Bearer:",Authorisation),
