@@ -58,9 +58,10 @@ plot.ADS_metrics = function(x, ...){
   abline(h=H_index, lty=2, col='red')
   abline(v=xloc[H_index], lty=2, col='red')
   legend('topright', legend=c(
-    paste0('Total: ', sum(cites)),
+    paste0('Papers: ', length(cites)),
+    paste0('Cites: ', sum(cites)),
     paste0('H-Index: ', H_index)
-  ), lty=c(NA,2), col=c(NA,'red'))
+  ), lty=c(NA,NA,2), col=c(NA,NA,'red'), bg='white')
 }
 
 ADS_export = function(papers="2015PASA...32...33R", Authorisation=NULL, format="%T %5.3L, %Y, %q, %V, %p, C=%c"){
