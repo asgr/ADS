@@ -61,7 +61,9 @@ Other arguments passed onto \code{print} and \code{plot}.
 }
 }
 \value{
-Erm, complicated. Do not worry about this too much!
+Erm, complicated. Don't worry about this too much!
+
+For the plots, the colour reflects the total reads (blue is few, green is middle, red is many).
 }
 \author{
 Aaron Robotham

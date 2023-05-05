@@ -30,7 +30,7 @@ ADS_metrics = function(papers="2015PASA...32...33R", Authorisation=NULL){
 }
 
 print.ADS_metrics = function(x, ...){
-  cites = get_ADS_info(ADS_metrics=x)
+  cites = get_ADS_info(ADS_metrics=x)$info
   cite_sort = sort(cites, decreasing = TRUE)
   H_index = max(which(1:length(cite_sort) <= cite_sort))
 
@@ -41,12 +41,15 @@ print.ADS_metrics = function(x, ...){
 }
 
 plot.ADS_metrics = function(x, ...){
-  cites = get_ADS_info(ADS_metrics=x)
+  cites = get_ADS_info(ADS_metrics=x)$info
   cite_order = order(cites, decreasing = TRUE)
   H_index = max(which(1:length(cites[cite_order]) <= cites[cite_order]))
 
+  reads = get_ADS_info(ADS_metrics=x, "basic stats", "total number of reads")$info[cite_order]
+
   par(mar=c(12.1,5.1,1.1,1.1))
-  xloc = barplot(cites[cite_order], names.arg=x$papers[cite_order], ylab='Cites', las=2, col='pink', ...)
+  xloc = barplot(cites[cite_order], names.arg=x$papers[cite_order], ylab='Cites', las=2,
+                 border=NA, col=hcl(magmap(reads, flip=TRUE, range=c(0,240), stretch='log', bad=240)$map), ...)
   abline(h=seq(0,max(cites),by=100), lty=2, col='grey')
   abline(h=seq(0,max(cites),by=20), lty=3, col='lightgrey')
   abline(h=H_index, lty=2, col='red')
@@ -87,7 +90,12 @@ print.ADS_export = function(x, ...){
 get_ADS_info = function(ADS_metrics, type='citation stats', info='number of citing papers'){
   i = NULL
   info = foreach(i = 1:length(ADS_metrics$papers), .combine='c')%do%{
-    content(ADS_metrics$metrics[[i]])[[type]][[info]]
+    temp = content(ADS_metrics$metrics[[i]])[[type]][[info]]
+    if(length(temp) == 0){
+      return(0L)
+    }else{
+      return(temp)
+    }
   }
   return(data.frame(paper=ADS_metrics$papers, info=info))
 }
