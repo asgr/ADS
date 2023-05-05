@@ -31,15 +31,15 @@ ADS_metrics = function(papers="2015PASA...32...33R", Authorisation=NULL){
 
 print.ADS_metrics = function(x, ...){
   cites = get_ADS_info(ADS_metrics=x)$info
-  cite_sort = sort(cites, decreasing = TRUE)
-  H_index = max(which(1:length(cite_sort) <= cite_sort))
+  cite_order = order(cites, decreasing = TRUE)
+  H_index = max(which(1:length(cites[cite_order]) <= cites[cite_order]))
 
   reads = get_ADS_info(ADS_metrics=x, "basic stats", "total number of reads")$info
 
   cat(paste0('Total: ', sum(cites)), '\n')
   cat(paste0('H-Index: ', H_index), '\n\n')
 
-  cat(paste0(x$papers[cite_order],': ',cites[cite_order], ' ', reads[cite_order]), sep='\n')
+  cat(paste0(x$papers[cite_order],' ',cites[cite_order], ' ', reads[cite_order]), sep='\n')
 }
 
 plot.ADS_metrics = function(x, ...){

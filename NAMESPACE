@@ -2,6 +2,7 @@ exportPattern("^[[:alpha:]]+")
 
 import("httr")
 import("foreach")
+import("magicaxis")
 
 S3method("print", ADS_metrics)
 S3method("print", ADS_export)

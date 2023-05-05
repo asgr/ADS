@@ -7,6 +7,6 @@ Author: Aaron Robotham
 Maintainer: Aaron Robotham <aaron.robotham@uwa.edu.au>
 Description: Presents basic stats on NASA ADS libraries and metrics.
 License: LGPL-3
-Imports: httr, foreach
+Imports: httr, foreach, magicaxis
 Encoding: UTF-8
 LazyData: true
