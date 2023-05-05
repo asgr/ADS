@@ -6,6 +6,7 @@
 \alias{print.ADS_metrics}
 \alias{print.ADS_export}
 \alias{plot.ADS_metrics}
+\alias{get_ADS_info}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 NASA ADS API Functions
@@ -18,6 +19,9 @@ ADS_metrics(papers = "2015PASA...32...33R", Authorisation = NULL)
 ADS_export(papers = "2015PASA...32...33R", Authorisation = NULL,
   format = "\%T \%5.3L, \%Y, \%q, \%V, \%p, C=\%c")
 ADS_library(library = NULL, Authorisation = NULL, rows = 1000)
+
+get_ADS_info(ADS_metrics, type = 'citation stats', info = 'number of citing papers')
+
 \method{print}{ADS_metrics}(x, ...)
 \method{print}{ADS_export}(x, ...)
 
@@ -39,6 +43,15 @@ Character scalar; ADS library ID.
 }
   \item{rows}{
 Integer scalar; maximum number of papers to return.
+}
+  \item{ADS_metrics}{
+List; object of class 'ADS_metrics', i.e. output of \code{ADS_metrics}.
+}
+  \item{type}{
+Character scalar; type of metric wanted.
+}
+  \item{info}{
+Character scalar; info of metric wanted (given the \option{type}.
 }
   \item{x}{
 An object of a relevant class.

@@ -1,7 +1,7 @@
 Package: ADS
 Type: Package
 Title: NASA ADS API
-Version: 0.1.1
+Version: 0.1.2
 Date: 2023-05-05
 Author: Aaron Robotham
 Maintainer: Aaron Robotham <aaron.robotham@uwa.edu.au>

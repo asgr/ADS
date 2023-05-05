@@ -30,10 +30,7 @@ ADS_metrics = function(papers="2015PASA...32...33R", Authorisation=NULL){
 }
 
 print.ADS_metrics = function(x, ...){
-  i = NULL
-  cites = foreach(i = 1:length(x$papers), .combine='c')%do%{
-    content(x$metrics[[i]])$`citation stats`$`number of citing papers`
-  }
+  cites = get_ADS_info(ADS_metrics=x)
   cite_sort = sort(cites, decreasing = TRUE)
   H_index = max(which(1:length(cite_sort) <= cite_sort))
 
@@ -44,10 +41,7 @@ print.ADS_metrics = function(x, ...){
 }
 
 plot.ADS_metrics = function(x, ...){
-  i = NULL
-  cites = foreach(i = 1:length(x$papers), .combine='c')%do%{
-    content(x$metrics[[i]])$`citation stats`$`number of citing papers`
-  }
+  cites = get_ADS_info(ADS_metrics=x)
   cite_order = order(cites, decreasing = TRUE)
   H_index = max(which(1:length(cites[cite_order]) <= cites[cite_order]))
 
@@ -88,4 +82,12 @@ print.ADS_export = function(x, ...){
     paste0(x$papers[i],': ', content(x$export[[i]])$export)
   }
   cat(info)
+}
+
+get_ADS_info = function(ADS_metrics, type='citation stats', info='number of citing papers'){
+  i = NULL
+  info = foreach(i = 1:length(ADS_metrics$papers), .combine='c')%do%{
+    content(ADS_metrics$metrics[[i]])[[type]][[info]]
+  }
+  return(data.frame(paper=ADS_metrics$papers, info=info))
 }
