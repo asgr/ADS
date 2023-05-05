@@ -34,10 +34,12 @@ print.ADS_metrics = function(x, ...){
   cite_sort = sort(cites, decreasing = TRUE)
   H_index = max(which(1:length(cite_sort) <= cite_sort))
 
+  reads = get_ADS_info(ADS_metrics=x, "basic stats", "total number of reads")$info
+
   cat(paste0('Total: ', sum(cites)), '\n')
   cat(paste0('H-Index: ', H_index), '\n\n')
 
-  cat(paste0(x$papers,': ',cites), sep='\n')
+  cat(paste0(x$papers[cite_order],': ',cites[cite_order], ' ', reads[cite_order]), sep='\n')
 }
 
 plot.ADS_metrics = function(x, ...){
@@ -45,11 +47,12 @@ plot.ADS_metrics = function(x, ...){
   cite_order = order(cites, decreasing = TRUE)
   H_index = max(which(1:length(cites[cite_order]) <= cites[cite_order]))
 
-  reads = get_ADS_info(ADS_metrics=x, "basic stats", "total number of reads")$info[cite_order]
+  reads = get_ADS_info(ADS_metrics=x, "basic stats", "total number of reads")$info
 
   par(mar=c(12.1,5.1,1.1,1.1))
   xloc = barplot(cites[cite_order], names.arg=x$papers[cite_order], ylab='Cites', las=2,
-                 border=NA, col=hcl(magmap(reads, flip=TRUE, range=c(0,240), stretch='log', bad=240)$map), ...)
+                 border=NA, col=hcl(magmap(reads[cite_order], flip=TRUE, range=c(0,240),
+                                           stretch='log', bad=240)$map), ...)
   abline(h=seq(0,max(cites),by=100), lty=2, col='grey')
   abline(h=seq(0,max(cites),by=20), lty=3, col='lightgrey')
   abline(h=H_index, lty=2, col='red')
