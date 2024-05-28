@@ -60,8 +60,11 @@ plot.ADS_metrics = function(x, ...){
   legend('topright', legend=c(
     paste0('Papers: ', length(cites)),
     paste0('Cites: ', sum(cites)),
-    paste0('H-Index: ', H_index)
-  ), lty=c(NA,NA,2), col=c(NA,NA,'red'), bg='white')
+    paste0('H-Index: ', H_index),
+    paste0('i1000: ', sum(cites >= 1000)),
+    paste0('i100: ', sum(cites >= 100)),
+    paste0('i10: ', sum(cites >= 10))
+  ), lty=c(NA,NA,2,NA,NA,NA), col=c(NA,NA,'red',NA,NA,NA), bg='white')
 }
 
 ADS_export = function(papers="2015PASA...32...33R", Authorisation=NULL, format="%T %5.3L, %Y, %q, %V, %p, C=%c"){
@@ -101,4 +104,8 @@ get_ADS_info = function(ADS_metrics, type='citation stats', info='number of citi
     }
   }
   return(data.frame(paper=ADS_metrics$papers, info=info))
+}
+
+ADS_goto = function(paper="2015PASA...32...33R"){
+  browseURL(paste0('https://ui.adsabs.harvard.edu/abs/',paper))
 }

@@ -7,6 +7,7 @@
 \alias{print.ADS_export}
 \alias{plot.ADS_metrics}
 \alias{get_ADS_info}
+\alias{ADS_goto}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 NASA ADS API Functions
@@ -22,6 +23,8 @@ ADS_library(library = NULL, Authorisation = NULL, rows = 1000)
 
 get_ADS_info(ADS_metrics, type = 'citation stats', info = 'number of citing papers')
 
+ADS_goto(paper = "2015PASA...32...33R")
+
 \method{print}{ADS_metrics}(x, ...)
 \method{print}{ADS_export}(x, ...)
 
@@ -31,6 +34,9 @@ get_ADS_info(ADS_metrics, type = 'citation stats', info = 'number of citing pape
 \arguments{
   \item{papers}{
 Character vector; unique paper ADS IDs.
+}
+  \item{paper}{
+Character scalar; unique paper ADS ID.
 }
   \item{Authorisation}{
 Character scalar; NASA ADS API token. You can get this at https://ui.adsabs.harvard.edu/user/settings/token.
@@ -75,7 +81,7 @@ Aaron Robotham
 ASGRfirst = unlist(content(ADS_library(library="-I4xxWbuR_-7f2b77Te36Q",
   Authorisation="my_token_here"))$documents)
 #Get metrics:
-ASGRfirst_metrics = ADS_metrics(papers=ASGRfirst, Authorisation="my_token_here)
+ASGRfirst_metrics = ADS_metrics(papers=ASGRfirst, Authorisation="my_token_here")
 print(ASGRfirst_metrics)
 plot(ASGRfirst_metrics)
 }
