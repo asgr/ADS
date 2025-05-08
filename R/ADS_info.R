@@ -1,11 +1,11 @@
 ADS_library = function(library=NULL, Authorisation=NULL, rows=1000){
 
   headers = c(
-    `Authorization` = paste0("Bearer:",Authorisation),
+    `Authorization` = paste0("Bearer ",Authorisation),
     `Content-Type` = "application/json"
   )
 
-  output = GET(url = paste0("https://api.adsabs.harvard.edu/v1/biblib/libraries/", library,"/?rows=",rows), add_headers(.headers=headers))
+  output = GET(url = paste0("https://api.adsabs.harvard.edu/v1/biblib/libraries/", library,"?rows=",rows), add_headers(.headers=headers))
 
   #class(output) = 'ADS_library'
   return(invisible(output))
@@ -14,7 +14,7 @@ ADS_library = function(library=NULL, Authorisation=NULL, rows=1000){
 ADS_metrics = function(papers="2015PASA...32...33R", Authorisation=NULL){
 
   headers = c(
-    `Authorization` = paste0("Bearer:",Authorisation),
+    `Authorization` = paste0("Bearer ",Authorisation),
     `Content-Type` = "application/json"
   )
 
@@ -70,7 +70,7 @@ plot.ADS_metrics = function(x, ...){
 ADS_export = function(papers="2015PASA...32...33R", Authorisation=NULL, format="%T %5.3L, %Y, %q, %V, %p, C=%c"){
 
   headers = c(
-    `Authorization` = paste0("Bearer:",Authorisation),
+    `Authorization` = paste0("Bearer ",Authorisation),
     `Content-Type` = "application/json"
   )
 
