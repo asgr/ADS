@@ -41,3 +41,13 @@ jobs:
         env:
           ADS_TOKEN: ${{ secrets.ADS_TOKEN }}
         run: Rscript exec/check_metrics.R
+
+      - name: Commit updated files
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ASGR_first_metrics.png data/ASGR_all_metrics.png
+          # Only commit if there are staged changes
+          git diff --staged --quiet || \
+            git commit -m "chore: update traffic metrics [$(date -u +%Y-%m-%d)]"
+          git push
