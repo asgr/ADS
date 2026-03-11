@@ -31,6 +31,7 @@ jobs:
         run: |
           install.packages("jsonlite", repos = "https://cloud.r-project.org")
           install.packages("httr", repos = "https://cloud.r-project.org")
+          install.packages("xml2", repos = "https://cloud.r-project.org")
           install.packages("magicaxis", repos = "https://cloud.r-project.org")
           install.packages("foreach", repos = "https://cloud.r-project.org")
 
