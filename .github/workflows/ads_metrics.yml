@@ -32,7 +32,10 @@ jobs:
           install.packages("jsonlite", repos = "https://cloud.r-project.org")
           install.packages("httr", repos = "https://cloud.r-project.org")
 
+      - name: Install this (ADS) package
+        run: R CMD INSTALL .
+
       - name: Fetch traffic metrics
         env:
-          GH_TRAFFIC_TOKEN: ${{ secrets.ADS_TOKEN }}
+          ADS_TOKEN: ${{ secrets.ADS_TOKEN }}
         run: Rscript R/check_metrics.R
