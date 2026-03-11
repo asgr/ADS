@@ -40,4 +40,4 @@ jobs:
       - name: Fetch traffic metrics
         env:
           ADS_TOKEN: ${{ secrets.ADS_TOKEN }}
-        run: Rscript R/check_metrics.R
+        run: Rscript exec/check_metrics.R
