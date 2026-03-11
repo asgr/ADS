@@ -95,7 +95,7 @@ print.ADS_export = function(x, ...){
 
 get_ADS_info = function(ADS_metrics, type='citation stats', info='number of citing papers'){
   i = NULL
-  info = foreach(i = 1:length(ADS_metrics$papers), .combine='c')%do%{
+  info = foreach(i = seq_len(length(ADS_metrics$papers)), .combine='c')%do%{
     temp = content(ADS_metrics$metrics[[i]])[[type]][[info]]
     if(length(temp) == 0){
       return(0L)
