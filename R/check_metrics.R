@@ -1,5 +1,5 @@
-library(ADS)
 library(httr)
+library(magicaxis)
 
 ADS_token <- Sys.getenv("ADS_TOKEN")
 if (nchar(ADS_token) == 0L) stop("No ADS_TOKEN set")
