@@ -1,88 +1,75 @@
-\name{ADS}
-\alias{ADS}
-\alias{ADS_library}
+\name{ADS_metrics}
 \alias{ADS_metrics}
-\alias{ADS_export}
 \alias{print.ADS_metrics}
-\alias{print.ADS_export}
 \alias{plot.ADS_metrics}
-\alias{get_ADS_info}
-\alias{ADS_goto}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-NASA ADS API Functions
+Retrieve and Display NASA ADS Citation Metrics
 }
 \description{
-Various functions to interact with NASA ADS Libraries and Papers.
+\code{ADS_metrics} fetches citation and read metrics from the NASA ADS API for one or
+more papers identified by their bibcodes. The returned object has \code{print} and
+\code{plot} S3 methods for convenient summary output and visualisation.
 }
 \usage{
 ADS_metrics(papers = "2015PASA...32...33R", Authorisation = NULL)
-ADS_export(papers = "2015PASA...32...33R", Authorisation = NULL,
-  format = "\%T \%5.3L, \%Y, \%q, \%V, \%p, C=\%c")
-ADS_library(library = NULL, Authorisation = NULL, rows = 1000)
-
-get_ADS_info(ADS_metrics, type = 'citation stats', info = 'number of citing papers')
-
-ADS_goto(paper = "2015PASA...32...33R")
 
 \method{print}{ADS_metrics}(x, ...)
-\method{print}{ADS_export}(x, ...)
 
 \method{plot}{ADS_metrics}(x, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{papers}{
-Character vector; unique paper ADS IDs.
-}
-  \item{paper}{
-Character scalar; unique paper ADS ID.
+Character vector; one or more unique NASA ADS bibcodes (paper IDs).
 }
   \item{Authorisation}{
-Character scalar; NASA ADS API token. You can get this at https://ui.adsabs.harvard.edu/user/settings/token.
-}
-  \item{format}{
-Character scalar; custom ADS export format.
-}
-  \item{library}{
-Character scalar; ADS library ID.
-}
-  \item{rows}{
-Integer scalar; maximum number of papers to return.
-}
-  \item{ADS_metrics}{
-List; object of class 'ADS_metrics', i.e. output of \code{ADS_metrics}.
-}
-  \item{type}{
-Character scalar; type of metric wanted.
-}
-  \item{info}{
-Character scalar; info of metric wanted (given the \option{type}.
+Character scalar; NASA ADS API token. Obtain yours at
+\url{https://ui.adsabs.harvard.edu/user/settings/token}.
 }
   \item{x}{
-An object of a relevant class.
+An object of class \code{'ADS_metrics'}, i.e. the output of \code{ADS_metrics}.
 }
   \item{\dots}{
-Other arguments passed onto \code{print} and \code{plot}.
+Further arguments passed to \code{print} or \code{plot}.
 }
+}
+\details{
+\code{ADS_metrics} calls the \verb{/v1/metrics} endpoint of the NASA ADS API once per
+bibcode.  The raw HTTP responses are stored in the returned list together with the
+vector of bibcodes.
+
+\code{print.ADS_metrics} prints the total citation count, the H-index, and a
+per-paper summary sorted in decreasing citation order.
+
+\code{plot.ADS_metrics} draws a bar chart of citations (sorted descending) with a
+red dashed line indicating the H-index. Bars are coloured by total read count (blue =
+few reads, green = intermediate, red = many reads).
 }
 \value{
-Erm, complicated. Don't worry about this too much!
-
-For the plots, the colour reflects the total reads (blue is few, green is middle, red is many).
+\code{ADS_metrics} returns an object of class \code{'ADS_metrics'} invisibly.  It is a
+list with two components:
+\item{papers}{Character vector of bibcodes.}
+\item{metrics}{List of raw \code{httr} response objects, one per bibcode.}
 }
 \author{
 Aaron Robotham
 }
-
+\seealso{
+\code{\link{ADS_library}}, \code{\link{ADS_export}}, \code{\link{get_ADS_info}},
+\code{\link{ADS_goto}}
+}
 \examples{
 \dontrun{
-#Get papers (this is my private library, so you will need to find your own):
-ASGRfirst = unlist(content(ADS_library(library="-I4xxWbuR_-7f2b77Te36Q",
-  Authorisation="my_token_here"))$documents)
-#Get metrics:
-ASGRfirst_metrics = ADS_metrics(papers=ASGRfirst, Authorisation="my_token_here")
-print(ASGRfirst_metrics)
-plot(ASGRfirst_metrics)
+# Retrieve metrics for a single paper
+m <- ADS_metrics(papers = "2015PASA...32...33R", Authorisation = "my_token_here")
+print(m)
+plot(m)
+
+# Retrieve metrics for multiple papers from a library
+papers <- unlist(httr::content(
+  ADS_library(library = "-I4xxWbuR_-7f2b77Te36Q", Authorisation = "my_token_here")
+)$documents)
+m_all <- ADS_metrics(papers = papers, Authorisation = "my_token_here")
+print(m_all)
+plot(m_all)
 }
 }
