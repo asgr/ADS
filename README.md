@@ -94,10 +94,9 @@ The `plot.ADS_metrics` method draws a bar chart where:
 * bar **colour** encodes the total read count (blue = few reads → green → red = many reads),
 * a **red dashed line** marks the H-index.
 
-Example output (ASGR group library):
+Example output (ASGR library):
 
 ![ASGR metrics plot](data/ASGR_first_metrics.png)
-![ASGR metrics plot](data/ASGR_all_metrics.png)
 
 ---
 
