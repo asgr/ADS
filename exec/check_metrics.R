@@ -29,11 +29,11 @@ legend('top', legend=Sys.Date())
 dev.off()
 
 #get library paper IDs
-ASGR_all = fetch_library_papers("aiv7eTyxRsCqB7jtDJw1YQ", "ASGR_all", ADS_token)
+#ASGR_all = fetch_library_papers("aiv7eTyxRsCqB7jtDJw1YQ", "ASGR_all", ADS_token)
 #get metrics
-ASGR_all_metrics = ADS_metrics(papers=ASGR_all, Authorisation=ADS_token)
+#ASGR_all_metrics = ADS_metrics(papers=ASGR_all, Authorisation=ADS_token)
 #plot
-png(paste0('data/ASGR_all_metrics.png'), width=800, height=800)
-plot(ASGR_all_metrics)
-legend('top', legend=Sys.Date())
-dev.off()
+#png(paste0('data/ASGR_all_metrics.png'), width=800, height=800)
+#plot(ASGR_all_metrics)
+#legend('top', legend=Sys.Date())
+#dev.off()
